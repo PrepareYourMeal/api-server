@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "shards-react";
 
-import PageTitle from "../components/common/PageTitle";
 import Editor from "../components/add-new-recipe/Editor";
 import SidebarActions from "../components/add-new-recipe/SidebarActions";
 import SidebarCategories from "../components/add-new-recipe/SidebarCategories";
@@ -10,7 +9,7 @@ const AddNewRecipe = () => (
   <Container fluid className="main-content-container px-4 pb-4">
     {/* Page Header */}
     <Row noGutters className="page-header py-4">
-      <PageTitle sm="4" title="Add New Recipe" subtitle="Recipes" className="text-sm-left" />
+      {/* <PageTitle sm="4" title="Add New Recipe" subtitle="Recipes" className="text-sm-left" /> */}
     </Row>
 
     <Row>

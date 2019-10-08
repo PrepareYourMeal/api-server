@@ -11,7 +11,6 @@ import {
   Alert
 } from "shards-react";
 
-import PageTitle from "../components/common/PageTitle";
 import Colors from "../components/components-overview/Colors";
 import Checkboxes from "../components/components-overview/Checkboxes";
 import RadioButtons from "../components/components-overview/RadioButtons";
@@ -41,12 +40,12 @@ const ComponentsOverview = () => (
     </Container>
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
-        <PageTitle
+        {/* <PageTitle
           sm="4"
           title="Forms & Components"
           subtitle="Overview"
           className="text-sm-left"
-        />
+        /> */}
       </Row>
 
       <Colors />
