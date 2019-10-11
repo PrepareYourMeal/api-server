@@ -25,6 +25,12 @@ export default function() {
       title: "Favorites",
       htmlBefore: '<i class="material-icons">favorite</i>',
       to: "/favorites",
+    },
+    {
+      title: "Bob",
+      htmlBefore: '<i class="material-icons">Bob</i>',
+      to: "/bob",
     }
+
   ];
 }

@@ -18,8 +18,11 @@ const AddNewRecipe = () => (
         <Editor />
       </Col>
 
-    
+
     </Row>
+
+    <h1>Add New Recipe</h1>;
+
   </Container>
 );
 

@@ -18,9 +18,9 @@ class Inventory extends React.Component {
     super(props);
 
     this.state = {
-   
 
-      
+
+
     };
   }
 
@@ -35,10 +35,13 @@ class Inventory extends React.Component {
     return (
       <Container fluid className="main-content-container px-4">
         {/* Page Header */}
+
+        <h1>Inventory</h1>;
+
         <Row noGutters className="page-header py-4">
         </Row>
 
-     
+
       </Container>
     );
   }
