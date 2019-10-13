@@ -6,7 +6,7 @@ const IngredientSchema = new mongoose.Schema({
         required: true
     },
     spoon_id: {
-        type: String,
+        type: Number,
         required: true
     }
 });

@@ -12,44 +12,240 @@ const ProfileSchema = new mongoose.Schema({
     planner: {
         monday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         tuesday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         wednesday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         thursday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         friday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         saturday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         sunday: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'recipes'
+                recipe_id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'recipes',
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                            required: true
+                        },
+                        name: {
+                            type: String,
+                            required: true
+                        },
+                        spoon_id: {
+                            type: Number,
+                            required: true
+                        },
+                        quantity: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
         date: {
@@ -59,20 +255,70 @@ const ProfileSchema = new mongoose.Schema({
     },
     inventory: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'ingredients'
+            ingredient_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ingredients',
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            spoon_id: {
+                type: Number,
+                required: true
+            }
         }
     ],
     grocery: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'ingredients'
+            ingredient_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ingredients',
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            spoon_id: {
+                type: Number,
+                required: true
+            }
         }
     ],
     favourites: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'recipes'
+            recipe_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'recipes',
+                required: true
+            },
+            title: {
+                type: String,
+                required: true
+            },
+            ingredients: [
+                {
+                    ingredient_id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'ingredients',
+                        required: true
+                    },
+                    name: {
+                        type: String,
+                        required: true
+                    },
+                    spoon_id: {
+                        type: Number,
+                        required: true
+                    },
+                    quantity: {
+                        type: Number,
+                        required: true
+                    }
+                }
+            ]
         }
     ],
     tags: {

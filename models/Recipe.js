@@ -6,7 +6,7 @@ const RecipeSchema = new mongoose.Schema({
         required: true
     },
     spoon_id: {
-        type: String,
+        type: Number,
         required: true
     },
     vegetarian: {
@@ -41,11 +41,29 @@ const RecipeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imageUrl: {
+        type: String,
+        required: true
+    },
     ingredients: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'ingredients',
-            required: true
+            ingredient_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ingredients',
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            spoon_id: {
+                type: Number,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            }
         }
     ],
     instructions: {
