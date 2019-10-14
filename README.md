@@ -1,9 +1,14 @@
-# Prep_Your_Meal  
+# Stove & Oven
+
 **SSW 690 Software Design Studio**  
   
 **STOVE AND OVEN WEB APPLICATION**  
   
-***Collaborators: Abhijit Ramin, Robert Chin, Sadie Stokes, Mrunal Salvi, Tanvi Hanamshet***  
+***Collaborators: Abhijit Amin, Robert Chin, Sadie Stokes, Mrunal Salvi, Tanvi Hanamshet***  
+
+**Deployment**
+- Stagging: [https://stove-and-oven-stagging.herokuapp.com](https://stove-and-oven-stagging.herokuapp.com)
+- Production: In progress
 
 **Description:**  
 This web application would allow the user to register and create a profile.  
@@ -59,8 +64,9 @@ passport: to implement google and facebook login and authentication
       --4.2.3-- To run the React client server: npm run client  
       --4.2.4-- To run both the Express backend and React frontend servers together using concurrently: npm run dev
 
---Docker-- Some important Docker command
-  --Docker.1-- Build Docker image: docker build -f Dockerfile -t recipe .
-  --Docker.2-- Run docker image: winpty docker run --rm -it --expose=7000 -p=7000:7000 -e="PORT=7000" -e="NODE_ENV=production" -e="CONFIG__mongoURI=mongodb+srv://{username}:{password}@mealplanner690-if2ak.mongodb.net/mealplanner?retryWrites=true&w=majority" -e="CONFIG__jwtSecret=mySecretToken" recipe
+**Some important Docker command**
+  1. Build Docker image: ```docker build -f Dockerfile -t recipe .```
+  2. Run docker image: 
+    ```winpty docker run --rm -it --expose=7000 -p=7000:7000 -e="PORT=7000" -e="NODE_ENV=production" -e="CONFIG__mongoURI=mongodb+srv://{username}:{password}@mealplanner690-if2ak.mongodb.net/mealplanner?retryWrites=true&w=majority" -e="CONFIG__jwtSecret=mySecretToken" recipe```
  
-Note* - Please make sure that you work on the latest commits and do commit and push to origin every time you change something in the project.  
+**Note** - Please make sure that you work on the latest commits and do commit and push to origin every time you change something in the project.  
