@@ -61,6 +61,6 @@ passport: to implement google and facebook login and authentication
 
 --Docker-- Some important Docker command
   --Docker.1-- Build Docker image: docker build -f Dockerfile -t recipe .
-  --Docker.2-- Run docker image: winpty docker run --rm -it --expose=7000 -p=7000:7000 -e="PORT=7000" recipe
+  --Docker.2-- Run docker image: winpty docker run --rm -it --expose=7000 -p=7000:7000 -e="PORT=7000" -e="NODE_ENV=production" -e="CONFIG__mongoURI=mongodb+srv://{username}:{password}@mealplanner690-if2ak.mongodb.net/mealplanner?retryWrites=true&w=majority" -e="CONFIG__jwtSecret=mySecretToken" recipe
  
 Note* - Please make sure that you work on the latest commits and do commit and push to origin every time you change something in the project.  

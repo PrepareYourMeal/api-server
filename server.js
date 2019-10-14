@@ -1,3 +1,4 @@
+const config = require('config');
 const express = require('express');
 const connectDB = require('./mongo/db');
 const users = require('./routes/api/users');
@@ -14,7 +15,14 @@ connectDB();
 //Init Middleware
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('API Running'));
+//serve react application during production
+console.log("App enviornment: " + config.get('NODE_ENV'));
+if(config.get('NODE_ENV') == "production"){
+    app.use('/', express.static('client/build'));
+}
+else{
+    app.get('/', (req, res) => res.send('API Running'));
+}
 
 //Define Routes
 app.use('/api/users', users);
