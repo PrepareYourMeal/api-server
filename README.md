@@ -57,6 +57,10 @@ passport: to implement google and facebook login and authentication
       --4.2.1-- To run the express backend server: npm start    
       --4.2.2-- To run the express backend using a liver server: npm run server  
       --4.2.3-- To run the React client server: npm run client  
-      --4.2.4-- To run both the Express backend and React frontend servers together using concurrently: npm run dev  
+      --4.2.4-- To run both the Express backend and React frontend servers together using concurrently: npm run dev
+
+--Docker-- Some important Docker command
+  --Docker.1-- Build Docker image: docker build -f Dockerfile -t recipe .
+  --Docker.2-- Run docker image: winpty docker run --rm -it --expose=7000 -p=7000:7000 -e="PORT=7000" -e="NODE_ENV=production" -e="CONFIG__mongoURI=mongodb+srv://{username}:{password}@mealplanner690-if2ak.mongodb.net/mealplanner?retryWrites=true&w=majority" -e="CONFIG__jwtSecret=mySecretToken" recipe
  
 Note* - Please make sure that you work on the latest commits and do commit and push to origin every time you change something in the project.  
