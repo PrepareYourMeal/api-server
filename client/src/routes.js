@@ -1,71 +1,52 @@
-import React from "react";
+import React from 'react';
 import { Redirect } from "react-router-dom";
+import { Route } from 'react-router-dom';
 
-// Layout Types
-import { DefaultLayout } from "./layouts";
+import { isUserAuthenticated } from './helpers/authUtils';
 
-// Route Views
-import Home from "./views/Home";
-import UserProfile from "./views/UserProfile";
-import AddNewRecipe from "./views/AddNewRecipe";
-import Errors from "./views/Errors";
-import Login from "./views/Login";
-import Plans from "./views/Plans";
-import Inventory from "./views/Inventory";
-import Favorites from "./views/Favorites";
-import Bob from "./views/Bob";
+// load views
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 
-export default [
+// auth
+const Login = React.lazy(() => import('./pages/auth/Login'));
+const Logout = React.lazy(() => import('./pages/auth/Logout'));
+const ForgetPassword = React.lazy(() => import('./pages/account/ForgetPassword'));
+const Register = React.lazy(() => import('./pages/account/Register'));
+const ConfirmAccount = React.lazy(() => import('./pages/account/Confirm'));
+
+const PrivateRoute = ({ component: Component, roles, ...rest }) => (
+  <Route {...rest} render={props => {
+    const isAuthTokenValid = isUserAuthenticated();
+    if (!isAuthTokenValid) {
+      // if not auth then redirect to login
+      return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    }
+
+    return <Component {...props} />
+  }} />
+)
+
+const routes = [
+  // auth and account
+  { path: '/login', name: 'Login', component: Login, route: Route },
+  { path: '/logout', name: 'Logout', component: Logout, route: Route },
+  { path: '/forget-password', name: 'Forget Password', component: ForgetPassword, route: Route },
+  { path: '/register', name: 'Register', component: Register, route: Route },
+  { path: '/confirm', name: 'Confirm', component: ConfirmAccount, route: Route },
+
+  // other pages
+  { path: '/dashboard', name: 'Dashboard', component: Dashboard, route: PrivateRoute, title: 'Dashboard' },
+  // { path: '/add-new', name: 'Add New Recipe', component: Dashboard, route: PrivateRoute, title: 'Recipe' },
+  // { path: '/meal-planner', name: 'Meal Planner', component: Dashboard, route: PrivateRoute, title: 'Meal Planner' },
+  // { path: '/inventory', name: 'Inventory', component: Dashboard, route: PrivateRoute, title: 'Inventory' },
+  // { path: '/favorites', name: 'Favorites', component: Dashboard, route: PrivateRoute, title: 'Favorites' },
   {
     path: "/",
     exact: true,
-    layout: DefaultLayout,
-    component: () => <Redirect to="/home" />
+    component: () => <Redirect to="/dashboard" />,
+    route: PrivateRoute
   },
-  {
-    path: "/home",
-    layout: DefaultLayout,
-    component: Home
-  },
-  {
-    path: "/user-profile",
-    layout: DefaultLayout,
-    component: UserProfile
-  },
-  {
-    path: "/add-new-recipe",
-    layout: DefaultLayout,
-    component: AddNewRecipe
-  },
-  {
-    path: "/errors",
-    layout: DefaultLayout,
-    component: Errors
-  },
-  {
-    path: "/login",
-    layout: DefaultLayout,
-    component: Login
-  },
+  
+]
 
-  {
-    path: "/plans",
-    layout: DefaultLayout,
-    component: Plans
-  },
-  {
-    path: "/inventory",
-    layout: DefaultLayout,
-    component: Inventory
-  },
-  {
-    path: "/favorites",
-    layout: DefaultLayout,
-    component: Plans
-  },
-  {
-    path: "/bob",
-    layout: DefaultLayout,
-    component: Bob
-  }
-];
+export { routes, PrivateRoute };

@@ -6,6 +6,8 @@ const auth = require('./routes/api/auth');
 const profile = require('./routes/api/profile');
 const recipes = require('./routes/api/recipes');
 const ingredients = require('./routes/api/ingredients');
+const bodyParser = require("body-parser");
+const cors = require("cors")
 
 const app = express();
 
@@ -14,6 +16,9 @@ connectDB();
 
 //Init Middleware
 app.use(express.json({ extended: false }));
+
+//cross origin
+app.use(cors())
 
 //serve react application during production
 console.log("App enviornment: " + config.get('NODE_ENV'));

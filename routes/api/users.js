@@ -4,11 +4,13 @@ const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+
 //Set express router
 const router = express.Router();
 
 //Import user model
 const User = require('../../models/User');
+
 
 //POST api/users
 // Register user

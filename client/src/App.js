@@ -1,30 +1,87 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { Component, Suspense } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Loadable from 'react-loadable';
 
-import routes from "./routes";
+import { routes } from './routes';
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
+import { isUserAuthenticated } from './helpers/authUtils';
 
-export default () => (
-  <Router basename={process.env.REACT_APP_BASENAME || ""}>
-    <div>
-      {routes.map((route, index) => {
-        return (
-          <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            component={(props => {
-              return (
-                <route.layout {...props}>
-                  <route.component {...props} />
-                </route.layout>
-              );
-            })}
-          />
-        );
-      })}
-    </div>
-  </Router>
-);
+import './assets/scss/DefaultTheme.scss';
+
+const loading = () => <div></div>
+
+// All layouts/containers
+const NonAuthLayout = Loadable({
+  loader: () => import('./components/NonAuthLayout'),
+  render(loaded, props) {
+    let Component = loaded.default;
+    return <Component {...props} />;
+  },
+  loading
+});
+
+const AuthLayout = Loadable({
+  loader: () => import('./components/AuthLayout'),
+  render(loaded, props) {
+    let Component = loaded.default;
+    return <Component {...props} />;
+  },
+  loading
+});
+
+const withLayout = (WrappedComponent) => {
+  const HOC = class extends Component {
+    render() {
+      return <WrappedComponent {...this.props} />;
+    }
+  };
+
+  return connect()(HOC);
+}
+
+class App extends Component {
+
+  getLayout = () => {
+    return isUserAuthenticated() ? AuthLayout : NonAuthLayout;
+  }
+
+  render() {
+    return (
+      // rendering the router with layout
+      <BrowserRouter>
+        <React.Fragment>
+          {routes.map((route, index) => {
+            return (
+              <route.route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                roles={route.roles}
+                component={withLayout(props => {
+                  const Layout = this.getLayout();
+                  return (
+                    <Suspense fallback={loading()}>
+                      <Layout {...props} title={route.title}>
+                        <route.component {...props} />
+                      </Layout>
+                    </Suspense>
+                  );
+                })}
+              />
+            );
+          })}
+        </React.Fragment>
+      </BrowserRouter>
+    );
+  }
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.Auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, null)(App);
