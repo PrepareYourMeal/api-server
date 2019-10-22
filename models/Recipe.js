@@ -31,11 +31,12 @@ const RecipeSchema = new mongoose.Schema({
     },
     preparationMinutes: {
         type: Number,
-        required: true
+    },
+    readyInMinutes: {
+        type: Number,
     },
     servings: {
         type: Number,
-        required: true
     },
     sourceUrl: {
         type: String,
@@ -63,6 +64,9 @@ const RecipeSchema = new mongoose.Schema({
             quantity: {
                 type: Number,
                 required: true
+            },
+            unit: {
+                type: String,
             }
         }
     ],
