@@ -34,7 +34,6 @@ const fetchJSON = (url, options = {}) => {
 }
 
 
-
 const setSession = (user) => {
     let cookies = new Cookies();
     if (user)
@@ -43,16 +42,16 @@ const setSession = (user) => {
         cookies.remove("user");
 };
 
-//login
-function* login({ payload: { email, password } }) {
+
+function* login({ payload: { username, password } }) {
     const options = {
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
     };
 
     try {
-        const response = yield call(fetchJSON, 'http://localhost:5000/api/auth', options);
+        const response = yield call(fetchJSON, '/users/authenticate', options);
         setSession(response);
         yield put(loginUserSuccess(response));
     } catch (error) {
@@ -68,7 +67,6 @@ function* login({ payload: { email, password } }) {
 }
 
 
-//logout
 function* logout({ payload: { history } }) {
     try {
         setSession(null);
@@ -78,16 +76,15 @@ function* logout({ payload: { history } }) {
     } catch (error) { }
 }
 
-//register
-function* register({ payload: { name, email, password } }) {
+function* register({ payload: { fullname, email, password } }) {
     const options = {
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ fullname, email, password }),
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
     };
 
     try {
-        const response = yield call(fetchJSON, 'http://localhost:5000/api/users', options);
+        const response = yield call(fetchJSON, '/users/register', options);
         yield put(registerUserSuccess(response));
     } catch (error) {
         let message;
@@ -100,9 +97,6 @@ function* register({ payload: { name, email, password } }) {
     }
 }
 
-/**
- * forget password
- */
 function* forgetPassword({ payload: { username } }) {
     const options = {
         body: JSON.stringify({ username }),

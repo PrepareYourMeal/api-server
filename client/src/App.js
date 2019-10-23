@@ -5,13 +5,15 @@ import Loadable from 'react-loadable';
 
 import { routes } from './routes';
 
+//get test api
+import { setupTest } from './helpers';
 import { isUserAuthenticated } from './helpers/authUtils';
 
 import './assets/scss/DefaultTheme.scss';
 
 const loading = () => <div></div>
 
-// All layouts/containers
+//all layouts
 const NonAuthLayout = Loadable({
   loader: () => import('./components/NonAuthLayout'),
   render(loaded, props) {
@@ -29,6 +31,8 @@ const AuthLayout = Loadable({
   },
   loading
 });
+
+setupTest();
 
 const withLayout = (WrappedComponent) => {
   const HOC = class extends Component {
