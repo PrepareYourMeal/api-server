@@ -44,11 +44,17 @@ const withLayout = (WrappedComponent) => {
   return connect()(HOC);
 }
 
+
 class App extends Component {
 
   getLayout = () => {
     return isUserAuthenticated() ? AuthLayout : NonAuthLayout;
   }
+
+  state = {
+    recipes: []
+  }
+
 
   render() {
     return (

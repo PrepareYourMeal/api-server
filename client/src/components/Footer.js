@@ -12,9 +12,9 @@ class Footer extends Component {
                         </div>
                         <div className="col-md-6">
                             <div className="text-md-right footer-links d-none d-sm-block">
-                                <a href="/">About Us</a>
-                                <a href="/">Help</a>
-                                <a href="/">Contact Us</a>
+                                <a href="/about">About Us</a>
+                                <a href="/help">Help</a>
+                                <a href="/contact">Contact Us</a>
                             </div>
                         </div>
                     </div>
