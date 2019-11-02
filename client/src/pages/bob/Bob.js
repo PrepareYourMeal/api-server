@@ -208,6 +208,21 @@ class Bob extends Component {
                                        {recipe.dairyFree.toString()}<br/>
                                        <span style={{ color: 'black' }}> Ketogenic Filter: </span>
                                        {recipe.ketogenic.toString()}<br/>
+
+                                       <br/>
+                                       <span style={{ color: 'black' }}> Instructions: </span>
+                                       {
+                                         recipe.instructions.map((instruction, index3) => (
+
+                                           <li style={{ padding: '1px' }} key={instruction}>
+                                           <span style={{ color: 'black' }}> - </span> {instruction} <br />
+                                           </li>
+
+                                         ))
+                                       }
+
+                                       <br/><br/>
+
                                      </li>
                                    ))
                                  }
