@@ -10,7 +10,7 @@ const Recipes = React.lazy(() => import('./pages/recipes/Recipes'));
 const Details = React.lazy(() => import('./pages/recipes/RecipeDetails'));
 const Favorites = React.lazy(() => import('./pages/favorites/Favorites'));
 const Seasonal = React.lazy(() => import('./pages/seasonal/Seasonal'));
-
+const Bob = React.lazy(() => import('./pages/bob/Bob'));
 
 const Help = React.lazy(() => import('./pages/information/Help'));
 const Contact = React.lazy(() => import('./pages/information/Contact'));
@@ -58,13 +58,14 @@ const routes = [
   // { path: '/inventory', name: 'Inventory', component: Dashboard, route: PrivateRoute, title: 'Inventory' },
   { path: '/favorites', name: 'Favorites', component: Favorites, route: PrivateRoute, title: 'Favorites' },
   { path: '/seasonal', name: 'Seasonal', component: Seasonal, route: PrivateRoute, title: 'Seasonal' },
+  { path: '/bob', name: 'Bob', component: Bob, route: PrivateRoute, title: 'Bob' },
   {
     path: "/",
     exact: true,
     component: () => <Redirect to="/dashboard" />,
     route: PrivateRoute
   },
-  
+
 ]
 
 export { routes, PrivateRoute };
