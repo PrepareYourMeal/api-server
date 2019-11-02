@@ -179,18 +179,34 @@ class Bob extends Component {
                                    {this.state.recipes.map((recipe, index) => (
 
                                      <li style={{ padding: '10px' }} key={recipe.title}>
-                                       <span style={{ color: 'gray' }}> id: </span> {recipe.spoon_id} <br />
-                                       <span style={{ color: 'gray' }}> data: </span>
+                                       <span style={{ color: 'black' }}> Spoonacular ID: </span> {recipe.spoon_id} <br />
+                                       <span style={{ color: 'black' }}> Recipe Title: </span>
                                        {recipe.title}<br/>
-                                       <span style={{ color: 'gray' }}> Vegetarian Filter: </span>
+
+                                       <br/>
+                                       <span style={{ color: 'black' }}> Ingredients: </span>
+                                       {
+                                         recipe.ingredients.map((ingredient, index2) => (
+
+                                           <li style={{ padding: '1px' }} key={ingredient.name}>
+                                           <span style={{ color: 'black' }}> ingredient name: </span> {ingredient.name} <br />
+                                           </li>
+
+                                         ))
+                                       }
+
+                                       <br/><br/>
+
+
+                                       <span style={{ color: 'black' }}> Vegetarian Filter: </span>
                                        {recipe.vegetarian.toString()}<br/>
-                                       <span style={{ color: 'gray' }}> Vegan Filter: </span>
+                                       <span style={{ color: 'black' }}> Vegan Filter: </span>
                                        {recipe.vegan.toString()}<br/>
-                                       <span style={{ color: 'gray' }}> glutenFree Filter: </span>
+                                       <span style={{ color: 'black' }}> glutenFree Filter: </span>
                                        {recipe.glutenFree.toString()}<br/>
-                                       <span style={{ color: 'gray' }}> DairyFree Filter: </span>
+                                       <span style={{ color: 'black' }}> DairyFree Filter: </span>
                                        {recipe.dairyFree.toString()}<br/>
-                                       <span style={{ color: 'gray' }}> Ketogenic Filter: </span>
+                                       <span style={{ color: 'black' }}> Ketogenic Filter: </span>
                                        {recipe.ketogenic.toString()}<br/>
                                      </li>
                                    ))
