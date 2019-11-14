@@ -29,7 +29,7 @@ router.get('/me', auth, async (req, res) => {
 // POST api/profile
 // Create user profile
 // access Private
-router.post('/', [ auth, [
+router.post('/', [[
     check('tags', 'You need to add your preferred tags').not().isEmpty()
 ]], async (req, res) => {
     const errors = validationResult(req);

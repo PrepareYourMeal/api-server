@@ -4,6 +4,8 @@ const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../../middleware/auth');
+const mongoose = require('mongoose');
 
 //Set express router
 const router = express.Router();
@@ -12,7 +14,27 @@ const router = express.Router();
 const User = require('../../models/User');
 
 
-//POST api/users
+// router.get()
+router.get('/', auth, async (req, res) => {
+    try {
+        // const user = await User.findById();
+        const authToken = req.query.token;
+        const user = await User.findOne({ authToken: authToken });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send('User not found');
+        }
+        res.status(500).send('Server Error');
+    }
+});
+
+
+// POST api/users
 // Register user
 // access - Public
 router.post('/', [

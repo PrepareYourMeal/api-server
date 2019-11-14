@@ -8,6 +8,9 @@ const recipes = require('./routes/api/recipes');
 const ingredients = require('./routes/api/ingredients');
 const bodyParser = require("body-parser");
 const cors = require("cors")
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -16,9 +19,19 @@ connectDB();
 
 //Init Middleware
 app.use(express.json({ extended: false }));
-
+app.use(cookieParser());
 //cross origin
 app.use(cors())
+app.use(
+    cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: ["verysecretive"]
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+require("./config/passport");
 
 //serve react application during production
 console.log("App enviornment: " + config.get('NODE_ENV'));
@@ -31,7 +44,7 @@ else{
 
 //Define Routes
 app.use('/api/users', users);
-app.use('/api/auth', auth);
+app.use('/auth', auth);
 app.use('/api/profile', profile);
 app.use('/api/recipes', recipes);
 app.use('/api/ingredients', ingredients);
