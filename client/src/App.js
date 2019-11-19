@@ -4,7 +4,7 @@ import './assets/scss/DefaultTheme.scss';
 import Topbar from './frontend/Topbar';
 import Home from './frontend/Home';
 import Landing from './frontend/Landing';
-import Navbar from './frontend/Navbar';
+import Navbar2 from './frontend/Navbar';
 import Alert from './frontend/Alert';
 import store from './store';
 import { PrivateRoute } from './routing/PrivateRoute';
@@ -16,6 +16,14 @@ import { Provider } from 'react-redux';
 import queryString from "query-string";
 import axios from 'axios';
 import './assets/scss/DefaultTheme.scss';
+import AuthLayout from './components/AuthLayout';
+import NonAuthLayout from './components/NonAuthLayout';
+import Dashboard from './frontend/Dashboard';
+import RecipeDetails from './frontend/recipes/RecipeDetails';
+import Favourites from './frontend/Favourites';
+import { getLoggedInUser } from './helpers/authUtils';
+// import axios from 'axios';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // if (localStorage.token) {
 //   setAuthToken(localStorage.token);
@@ -28,10 +36,23 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null,
+      user: getLoggedInUser(),
       isAuthenticated: false,
+      
     }
-    // this.authenticateUser.bind(this)
+    this.authenticateUser.bind(this);
+    this.handleLogout.bind(this);
+    this.loadUser.bind(this);
+
+    if (localStorage.getItem("accessJWT")) {
+      this.loadUser();
+    }
+  }
+
+  loadUser = () => {
+    const token = localStorage.getItem("accessJWT");
+    const user = axios.get(`/api/users/?token=${token}`, { withCredentials: true });
+    this.setState({ user: user.data, isAuthenticated: true });
   }
 
   authenticateUser = (userData) => {
@@ -41,6 +62,10 @@ class App extends Component {
   handleLogout = () => {
     this.setState({isAuthenticated: false, user: null});
   };
+
+  // componentDidMount() {
+  //   this.loadUser();
+  // }
 
   // async componentDidMount() {
   //   // let query = queryString.parse(this.props.location.search);
@@ -63,33 +88,58 @@ class App extends Component {
   render() {
     return (
       // rendering the router with layout
+      <div className="app">
+        {/* {this.isAuthenticated ? AuthLayout : NonAuthLayout} */}
+        {/* <AuthLayout /> */}
+        <Navbar2 />
+        <Router>
+          <Switch>
+            <Route exact path={"/"} render={props => (
+              <Home {...props} isAuthenticated={this.state.isAuthenticated} />
+            )} />
+            <Route exact path={"/dashboard"}  render={props => (
+              <Dashboard {...props} isAuthenticated={this.state.isAuthenticated} authenticateUser={this.authenticateUser} />
+            )}/>
+            <Route exact path={"/recipes"}  render={props => (
+              <Recipes {...props} isAuthenticated={this.state.isAuthenticated} user={this.state.user} />
+            )}/>
+            <Route exact path={"/recipes/:id"}  render={props => (
+              <RecipeDetails {...props} isAuthenticated={this.state.isAuthenticated} user={this.state.user} />
+            )}/>
+            <Route exact path={"/favourites"}  render={props => (
+              <Favourites {...props} isAuthenticated={this.state.isAuthenticated} user={this.state.user} />
+            )}/>
+          </Switch>
+          
+        </Router>
+      </div>
 
-      <Router>
-        <Fragment>
-          <div className="App">
-          <Topbar authenticate={this.authenticateUser} isAuthenticated={this.state.isAuthenticated} />
+      // <Router>
+      //   <Fragment>
+      //     <div className="App">
+      //     <Topbar authenticate={this.authenticateUser} isAuthenticated={this.state.isAuthenticated} />
 
-          {/* <Recipes></Recipes>
-          <Home></Home> */}
+      //     {/* <Recipes></Recipes>
+      //     <Home></Home> */}
         
-        {/* <section className="container">
-          <Navbar />
-        </section> */}
+      //   {/* <section className="container">
+      //     <Navbar />
+      //   </section> */}
         
         
         
-        <Switch>
-          <Route exact path='/' component={Recipes} />
-          <Route exact path="/home" render={(props) => <Home {...props} authenticate={this.authenticateUser.bind(this)}></Home>}/>
-        </Switch>
+      //   <Switch>
+      //     <Route exact path='/' component={Recipes} />
+      //     <Route exact path="/home" render={(props) => <Home {...props} authenticate={this.authenticateUser.bind(this)}></Home>}/>
+      //   </Switch>
         
-        {/* </section> */}
+      //   {/* </section> */}
 
-          </div>
+      //     </div>
           
 
-        </Fragment>
-      </Router>
+      //   </Fragment>
+      // </Router>
 
     );
   }

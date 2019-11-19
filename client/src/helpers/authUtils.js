@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import { Cookies } from "react-cookie";
+import axios from 'axios';
 
 // Check if user is authenticated
 const isUserAuthenticated = () => {
@@ -19,9 +20,18 @@ const isUserAuthenticated = () => {
 }
 
 const getLoggedInUser = () => {
-    const cookies = new Cookies(); 
-    const user = cookies.get("user");
-    return user ? (typeof(user) == 'object'? user: JSON.parse(user)) : null;
+    const token = localStorage.getItem("accessJWT");
+    if (token) {
+        const user = axios.get(`/api/users/?token=${token}`, { withCredentials: true });
+        return user.data;
+    } else {
+        return null;
+    }
+
+    
+    // const cookies = new Cookies(); 
+    // const user = cookies.get("user");
+    // return user ? (typeof(user) == 'object'? user: JSON.parse(user)) : null;
 }
 
 export { isUserAuthenticated, getLoggedInUser };

@@ -34,6 +34,9 @@ const UserSchema = new mongoose.Schema({
                 title: {
                     type: String
                 },
+                spoon_id: {
+                    type: Number
+                },
                 ingredients: [
                     {
                         ingredient_id: {
@@ -61,6 +64,9 @@ const UserSchema = new mongoose.Schema({
                 },
                 title: {
                     type: String
+                },
+                spoon_id: {
+                    type: Number
                 },
                 ingredients: [
                     {
@@ -90,7 +96,9 @@ const UserSchema = new mongoose.Schema({
                 },
                 title: {
                     type: String
-
+                },
+                spoon_id: {
+                    type: Number
                 },
                 ingredients: [
                     {
@@ -121,6 +129,9 @@ const UserSchema = new mongoose.Schema({
                 title: {
                     type: String
                 },
+                spoon_id: {
+                    type: Number
+                },
                 ingredients: [
                     {
                         ingredient_id: {
@@ -148,6 +159,9 @@ const UserSchema = new mongoose.Schema({
                 },
                 title: {
                     type: String
+                },
+                spoon_id: {
+                    type: Number
                 },
                 ingredients: [
                     {
@@ -177,6 +191,9 @@ const UserSchema = new mongoose.Schema({
                 title: {
                     type: String
                 },
+                spoon_id: {
+                    type: Number
+                },
                 ingredients: [
                     {
                         ingredient_id: {
@@ -204,6 +221,9 @@ const UserSchema = new mongoose.Schema({
                 },
                 title: {
                     type: String
+                },
+                spoon_id: {
+                    type: Number
                 },
                 ingredients: [
                     {
@@ -265,6 +285,9 @@ const UserSchema = new mongoose.Schema({
             },
             title: {
                 type: String
+            },
+            spoon_id: {
+                type: Number
             },
             ingredients: [
                 {

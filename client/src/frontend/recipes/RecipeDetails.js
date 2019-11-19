@@ -36,7 +36,7 @@ class RecipeDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: getLoggedInUser(),
+            user: props.user,
             activeFirstTab: "1",
             activeRecipe: []
         };
@@ -47,6 +47,8 @@ class RecipeDetails extends Component {
             this.setState({activeFirstTab: tab});
         }
     }
+
+    
 
     componentDidMount = () => {
         console.log(this.props.location.pathname.split("/")[2])
@@ -114,6 +116,7 @@ class RecipeDetails extends Component {
                                 <br/>
                                 {this.state.activeRecipe.recipe ? this.state.activeRecipe.recipe.instructions : "instructions"} 
                             </p>
+                            <Button onClick={() => this.props.addFavourite()} />
                         </CardBody>
                     </Card>
                   
@@ -128,4 +131,4 @@ class RecipeDetails extends Component {
 }
 
 
-export default connect()(RecipeDetails);
+export default RecipeDetails;
