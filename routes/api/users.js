@@ -96,4 +96,377 @@ router.post('/', [
     }
 });
 
+
+
+router.put('/:token/favourites', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.favourites.unshift(recipe);
+        await user.save();
+        res.status(200).send("Favourites updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+
+
+});
+
+router.delete('/:token/favourites/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.favourites.map(item => item.spoon_id).indexOf(recId);
+        user.favourites.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted favourites");
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+router.put('/:token/inventory', [ auth, [
+    check('ingredients', 'Ingredients is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { ingredients } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.inventory.unshift(ingredients);
+        await user.save();
+        res.status(200).send("Ingredients updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/inventory/:ing_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const ingId = req.params.ing_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.inventory.map(item => item.spoon_id).indexOf(ingId);
+        user.inventory.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted ingredients");
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.put('/:token/planner/monday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.monday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Monday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/monday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.monday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.monday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted monday");
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.put('/:token/planner/tuesday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.tuesday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Tuesday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/tuesday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.tuesday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.tuesday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted tuesday");
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.put('/:token/planner/wednesday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.wednesday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Wednesday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/wednesday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.wednesday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.wednesday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted wednesday");
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+router.put('/:token/planner/thursday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.thursday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Thursday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/thursday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.thursday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.thursday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted thursday");
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+router.put('/:token/planner/friday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.friday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Friday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/friday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.friday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.friday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted friday");
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.put('/:token/planner/saturday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.saturday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Saturday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/saturday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.saturday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.saturday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted saturday");
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.put('/:token/planner/sunday', [ auth, [
+    check('recipe', 'Recipe is required').not().isEmpty()
+] ], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const token = req.params.token;
+    try {
+        const { recipe } = req.body;
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        user.planner.sunday.unshift(recipe);
+        await user.save();
+        res.status(200).send("Monday updated");
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.delete('/:token/planner/sunday/:rec_id', auth, async (req, res) => {
+    const token = req.params.token;
+    const recId = req.params.rec_id;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const removeIndex = user.planner.sunday.map(item => item.spoon_id).indexOf(recId);
+        user.planner.sunday.splice(removeIndex, 1);
+        await user.save();
+        res.status(200).send("Deleted monday");
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 module.exports = router;

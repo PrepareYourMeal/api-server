@@ -34,7 +34,7 @@ router.get('/google/callback', passport.authenticate("google"), async (req, res)
 
     res.cookie('accessJWT', authJwtToken, cookieOptions);
 
-    return res.redirect(`/home?token=${token}&userId=${userId}`);
+    return res.redirect(`/dashboard?token=${token}&userId=${userId}`);
     // let token = req.user.token;
     // let profile = await Profile.findOne({ user: req.user.id });
     // if (!profile) {
