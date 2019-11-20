@@ -32,14 +32,12 @@ const NavMenuContent = (props) => {
                     Seasonal
                 </Link>
             </li>
-
-{/*          <li className="has-submenu">
-                <Link to="/bob" className="side-nav-link-ref">
-                    <i className="mdi mdi-leaf"></i>
-                    Bob
+            <li className="has-submenu">
+                <Link to="/planner" className="side-nav-link-ref">
+                    <i className="mdi mdi-file-document-box-multiple"></i>
+                    Planner
                 </Link>
             </li>
-*/}
         </ul>
     </React.Fragment>
 }
