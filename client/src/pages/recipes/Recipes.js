@@ -28,12 +28,151 @@ class Recipes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: getLoggedInUser(),
-            recipes: []
+            user: {},
+            recipes: [],
+            isAuthenticated: false
         };
     }
 
+    addFavourite(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/favourites`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addMonday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/monday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addTuesday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/tuesday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addWednesday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/wednesday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addThursday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/thursday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addFriday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/friday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addSaturday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/saturday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
+    addSunday(recipe) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/planner/sunday`;
+        const data = {
+            recipe: recipe
+        }
+        axios.put(url, data, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(r => console.log(r.status))
+        .catch(e => console.log(e));
+    }
+
     componentDidMount() {
+        let token = window.localStorage.getItem('accessJWT')
+        if (token) {
+            console.log("2")
+
+            // let userId = query.userId;
+            // let token = query.token;
+            // window.localStorage.setItem("accessJWT", token);
+            console.log("3")
+            const url = `/api/users/?token=${token}`;
+            axios.get(url, { withCredentials: true }).then(response => response.data)
+            .then((data) => {
+                console.log(data)
+                this.setState({ user: data, isAuthenticated: true })
+                console.log(this.state.user)
+                // this.props.history.push('/dashboard');
+            })
+        }
+
         const url ='http://localhost:5000/api/recipes?size=12';
         axios.get(url).then(response => response.data)
         .then((data) => {
@@ -328,7 +467,15 @@ class Recipes extends Component {
                                           {/* <CardSubtitle>{recipe.servings}</CardSubtitle> */}
                                           {/* <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText> */}
                                           <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                         
+                                         <Button onClick={() => this.addFavourite(recipe)}>Add Favourite</Button>
+                                         <Button onClick={() => this.addMonday(recipe)}>Monday</Button>
+                                         <Button onClick={() => this.addTuesday(recipe)}>Tuesday</Button>
+                                         <Button onClick={() => this.addWednesday(recipe)}>Wednesday</Button>
+                                         <Button onClick={() => this.addThursday(recipe)}>Thursday</Button>
+                                         <Button onClick={() => this.addFriday(recipe)}>Friday</Button>
+                                         <Button onClick={() => this.addSaturday(recipe)}>Saturday</Button>
+                                         <Button onClick={() => this.addSunday(recipe)}>Sunday</Button>
+        
                                       </CardBody>
                                   </Card>
                                   </CardDeck>

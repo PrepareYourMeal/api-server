@@ -25,14 +25,17 @@ router.get('/google/callback', passport.authenticate("google"), async (req, res)
         authToken: token
     }
 
+    const user = await User.findOne({ authToken: token });
+
     const authJwtToken = jwt.sign(jwtPayload, config.get('jwtSecret'));
 
     const cookieOptions = {
         httpOnly: true,
-        expires: 0
+        maxAge: 2 * 60 * 60 * 1000
     }
 
     res.cookie('accessJWT', authJwtToken, cookieOptions);
+    // res.cookie('user', JSON.stringify(user), cookieOptions)
 
     return res.redirect(`/dashboard?token=${token}&userId=${userId}`);
     // let token = req.user.token;

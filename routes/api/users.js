@@ -96,6 +96,20 @@ router.post('/', [
     }
 });
 
+router.get('/:token/favourites', auth, async (req, res) => {
+    const token = req.params.token;
+    try {
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        res.json(user.favourites);
+    } catch (e) {
+        console.log(e)
+    }
+});
+
 
 
 router.put('/:token/favourites', [ auth, [
@@ -177,6 +191,20 @@ router.delete('/:token/inventory/:ing_id', auth, async (req, res) => {
         user.inventory.splice(removeIndex, 1);
         await user.save();
         res.status(200).send("Deleted ingredients");
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+router.get('/:token/planner', auth, async (req, res) => {
+    const token = req.params.token;
+    try {
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        res.json(user.planner);
     } catch (e) {
         console.log(e)
     }
