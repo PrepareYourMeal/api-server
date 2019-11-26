@@ -31,6 +31,7 @@ import {NavLink} from "react-router-dom";
 import classnames from "classnames";
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 
 import {getLoggedInUser} from '../../helpers/authUtils';
 import Loader from '../../components/Loader';
@@ -42,32 +43,38 @@ class RecipeDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: getLoggedInUser(),
+            user: {},
             activeFirstTab: "1",
-            activeRecipe: [],
+            activeRecipe: []
         };
     }
 
         
-    toggleTab(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({activeFirstTab: tab});
-        }
-    }
+    // toggleTab(tab) {
+    //     if (this.state.activeTab !== tab) {
+    //         this.setState({activeFirstTab: tab});
+    //     }
+    // }
 
     componentDidMount = () => {
-        const url ='http://localhost:5000/api/recipes?size=12';
-        axios.get(url).then(response => response.data)
-        .then((data) => {
-            console.log(data)
-         })
-        // console.log(this.props.location.pathname.split("/")[2])
-        // console.log(this.props.location.state)
-        this.setState({activeRecipe: this.props.location.state})
-        console.log(this.state)
-        // setTimeout(() => {
-        //     console.log(this.state.activeRecipe.recipe.title)
-        // }, 200);
+      let query = queryString.parse(this.props.location.search);
+      const url =`/api/recipes/?spoon_id=${query.spoon_id}`;
+      axios.get(url).then(response => response.data)
+      .then((data) => {
+          console.log(data)
+          this.setState({ activeRecipe: data })
+          console.log(this.state)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+      // console.log(this.props.location.pathname.split("/")[2])
+      // console.log(this.props.location.state)
+      
+      
+      // setTimeout(() => {
+      //     console.log(this.state.activeRecipe.recipe.title)
+      // }, 200);
 
     }
 

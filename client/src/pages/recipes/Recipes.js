@@ -466,7 +466,7 @@ class Recipes extends Component {
                                           <p class="text-center"><small>{recipe.title}</small></p>                                        
                                           {/* <CardSubtitle>{recipe.servings}</CardSubtitle> */}
                                           {/* <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText> */}
-                                          <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                          <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
                                          <Button onClick={() => this.addFavourite(recipe)}>Add Favourite</Button>
                                          <Button onClick={() => this.addMonday(recipe)}>Monday</Button>
                                          <Button onClick={() => this.addTuesday(recipe)}>Tuesday</Button>
@@ -490,7 +490,5 @@ class Recipes extends Component {
 
     }
 }
-
-
 
 export default connect()(Recipes);

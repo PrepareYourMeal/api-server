@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Card, CardBody } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardTitle, Button } from 'reactstrap';
 
 import { getLoggedInUser } from '../helpers/authUtils';
 import Loader from '../components/Loader';
@@ -13,31 +13,13 @@ class DefaultDashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {}
+            user: {},
+            inventory: []
         };
+        this.removeIngredient.bind(this);
     }
 
     componentDidMount() {
-        
-        console.log(document.cookie);
-        console.log("1")
-        let token = window.localStorage.getItem('accessJWT')
-        if (token) {
-            console.log("2")
-
-            // let userId = query.userId;
-            // let token = query.token;
-            // window.localStorage.setItem("accessJWT", token);
-            console.log("3")
-            const url = `/api/users/?token=${token}`;
-            axios.get(url, { withCredentials: true }).then(response => response.data)
-            .then((data) => {
-                console.log(data)
-                this.setState({ user: data })
-                console.log(this.state.user)
-                // this.props.history.push('/dashboard');
-            })
-        }
         let query = queryString.parse(this.props.location.search);
         if (query.token) {
             console.log("2")
@@ -54,23 +36,46 @@ class DefaultDashboard extends Component {
                 console.log(this.state.user)
                 this.props.history.push('/dashboard');
             })
-            // const user = await axios.get(`/api/users/?token=${token}`, { withCredentials: true });
-            // console.log("4")
-            // console.log(user);
-            // this.setState({ user: user.data });
-            // console.log(this.state);
-            // this.setState({ user: user, isAuthenticated: true, name: name });
-            // this.props.authenticateUser(user.data);
-            // console.log("5")
-
-            
-
         }
+        
+        console.log(document.cookie);
+        console.log("1")
+        let token = window.localStorage.getItem('accessJWT')
+        if (token) {
+            console.log("2")
+
+            // let userId = query.userId;
+            // let token = query.token;
+            // window.localStorage.setItem("accessJWT", token);
+            console.log("3")
+            const url = `/api/users/${token}/inventory`;
+            axios.get(url, { withCredentials: true }).then(response => response.data)
+            .then((data) => {
+                console.log(data)
+                this.setState({ inventory: data })
+            })
+        }
+    }
+
+    removeIngredient(ingi_id) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/inventory/${ingi_id}`
+        axios.delete(url, { withCredentials: true })
+        .then(r => {
+            
+            let inventory = this.state.inventory;  
+            const removeIndex = inventory.map(item => item.spoon_id).indexOf(ingi_id);
+            inventory.splice(removeIndex, 1);
+            this.setState({ inventory: inventory });
+            console.log(r.status);
+            console.log(this.state.inventory)
+        })
+        .catch(e => console.log(e))
     }
     
 
     render() {
-        let { name } = this.state.user
+        // let { name, inventory } = this.state.user
 
         return (
             <React.Fragment>
@@ -92,9 +97,19 @@ class DefaultDashboard extends Component {
                             <Card>
                                 <CardBody>
                                     Whats in your fridge?
-                                    {name}
                                 </CardBody>
                             </Card>
+                            {this.state.inventory.map((ingredients, index) => (
+                            <Card>
+                            <Col lg={3} key={index}>
+                            <Card>
+                                <CardTitle>{ingredients.name}</CardTitle>
+                                <Button onClick={() => this.removeIngredient(ingredients.spoon_id)}>Remove from Fridge</Button>
+                            </Card>
+                            </Col>
+                            </Card>
+                            ))}
+
                         </Col>
                     </Row>
                 </div>

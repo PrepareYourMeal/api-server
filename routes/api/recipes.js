@@ -148,9 +148,10 @@ router.post('/', [
 // GET api/recipes/:id
 // get recipe by id
 // access - Public
-router.get('/:id', async (req, res) => {
+router.get('/:spoon_id', async (req, res) => {
     try {
-        const recipe = await Recipe.findById(req.params.id);
+        const spoon_id = req.params.spoon_id;
+        const recipe = await Recipe.findOne({ spoon_id: spoon_id });
         if (!recipe) {
             return res.status(404).send('Recipe not found');
         }

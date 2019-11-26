@@ -59,7 +59,7 @@ const routes = [
   // other pages
   { path: '/dashboard', name: 'Dashboard', component: Dashboard, route: Route, title: 'Dashboard' },
   { path: '/recipes', name: 'Recipes', component: Recipes, route: Route, exact:true, title: 'Recipes' },
-  { path: '/recipe/:id', name: 'RecipeDetails', component: Details, route: Route, title: 'RecipeDetails' },
+  { path: '/recipe/?spoon_id=', name: 'RecipeDetails', component: Details, route: Route, title: 'RecipeDetails' },
 
   // company information
   { path: '/contact', name: 'Contact Us', component: Contact, route: Route, title: 'Contact Us' },

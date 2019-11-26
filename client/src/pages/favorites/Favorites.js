@@ -63,6 +63,21 @@ class Favorites extends Component {
         }
     }
 
+    removeFavourite(rec_id) {
+        let token = window.localStorage.getItem('accessJWT')
+        const url = `/api/users/${token}/favourites/${rec_id}`
+        axios.delete(url, { withCredentials: true })
+        .then(r => {
+            let favourites = this.state.favourites;  
+            const removeIndex = favourites.map(item => item.spoon_id).indexOf(rec_id);
+            favourites.splice(removeIndex, 1);
+            this.setState({ favourites: favourites });
+            console.log(r.status);
+            console.log(this.state.favourites)
+        })
+        .catch(e => console.log(e))
+    }
+
     renderObj = () => { 
         Object.keys(this.state.user).map((obj, i) => {
         return (
@@ -100,13 +115,12 @@ class Favorites extends Component {
                               <CardDeck>
   
                                   <Card className="gal-detail thumb card" height="60%">
-                                      <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
                                       <CardBody>
                                           <p className="text-center"><small>{recipe.title}</small></p>                                        
                                           {/* <CardSubtitle>{recipe.servings}</CardSubtitle> */}
                                           {/* <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText> */}
                                           <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                         
+                                         <Button onClick={() => this.removeFavourite(recipe.spoon_id)}>Remove from Fridge</Button>
                                       </CardBody>
                                   </Card>
                                   </CardDeck>

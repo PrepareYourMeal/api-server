@@ -155,6 +155,20 @@ router.delete('/:token/favourites/:rec_id', auth, async (req, res) => {
     }
 });
 
+router.get('/:token/inventory', auth, async (req, res) => {
+    const token = req.params.token;
+    try {
+        const user = await User.findOne({ authToken: token });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        res.json(user.inventory);
+    } catch (e) {
+        console.log(e)
+    }
+});
+
 router.put('/:token/inventory', [ auth, [
     check('ingredients', 'Ingredients is required').not().isEmpty()
 ] ], async (req, res) => {
