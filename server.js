@@ -11,6 +11,7 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
+const path = require('path');
 
 const app = express();
 
@@ -36,7 +37,7 @@ require("./config/passport");
 //serve react application during production
 console.log("App enviornment: " + config.get('NODE_ENV'));
 if(config.get('NODE_ENV') == "production"){
-    app.use('/', express.static('client/build'));
+    app.use(express.static(path.join(__dirname, 'client/build')));
 }
 else{
     app.get('/', (req, res) => res.send('API Running'));
@@ -49,6 +50,10 @@ app.use('/api/profile', profile);
 app.use('/api/recipes', recipes);
 app.use('/api/ingredients', ingredients);
 
+//Load react page if none of the path match
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 
