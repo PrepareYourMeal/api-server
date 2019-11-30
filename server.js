@@ -46,6 +46,7 @@ console.log("App enviornment: " + config.get('NODE_ENV'));
 if(config.get('NODE_ENV') == "production"){
     app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
     app.use('/assets', express.static(path.join(__dirname, 'client/src/assets')));
+    app.use('/favicon.ico', express.static(path.join(__dirname, 'client/build/favicon.ico')));
     //Load react page if none of the path match
     app.get('*', (req,res) =>{
         console.log("Can not find file." + req.originalUrl);
