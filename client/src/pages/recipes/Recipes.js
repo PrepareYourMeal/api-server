@@ -173,7 +173,7 @@ class Recipes extends Component {
             })
         }
 
-        const url ='http://localhost:5000/api/recipes?size=12';
+        const url ='/api/recipes?size=12';
         axios.get(url).then(response => response.data)
         .then((data) => {
             console.log(data)
