@@ -36,7 +36,8 @@ require("./config/passport");
 //serve react application during production
 console.log("App enviornment: " + config.get('NODE_ENV'));
 if(config.get('NODE_ENV') == "production"){
-    app.use('/', express.static('client/build'));
+    //app.use('/', express.static('client/build'));
+    app.use('/', express.static(path.join(__dirname, 'client/build')));
 }
 else{
     app.get('/', (req, res) => res.send('API Running'));
