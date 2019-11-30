@@ -52,7 +52,7 @@ app.use('/api/ingredients', ingredients);
 
 //Load react page if none of the path match
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+    res.sendFile('index.html', {root: path.join(__dirname, 'client/build/')});
 });
 
 const PORT = process.env.PORT || 5000;
