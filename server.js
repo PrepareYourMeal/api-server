@@ -45,7 +45,7 @@ app.use('/api/ingredients', ingredients);
 console.log("App enviornment: " + config.get('NODE_ENV'));
 if(config.get('NODE_ENV') == "production"){
     app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
-    app.use('/assets', express.static(path.join(__dirname, 'client/assets')));
+    app.use('/assets', express.static(path.join(__dirname, 'client/src/assets')));
     //Load react page if none of the path match
     app.get('*', (req,res) =>{
         console.log("Can not find file." + req.originalUrl);
