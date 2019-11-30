@@ -8,26 +8,26 @@
 
 **Deployment**
 - Stagging: [https://stove-and-oven-stagging.herokuapp.com](https://stove-and-oven-stagging.herokuapp.com)
-- Production: In progress
+- Production: [https://stove-and-oven.herokuapp.com](https://stove-and-oven.herokuapp.com)
 
 **Description:**  
-This web application would allow the user to register and create a profile.  
-The user can use this web app to track ingredients in their house.  
-The user will be able to see the a list of recipes that he/she can make considering the ingredients in the house.  
-The user will be able to filter through and categorize recipes.  
-The web application will provide the user with a meal planner model.  
-The web application will determine the list of grocery materials to be bought considering the meal plan.  
+- This web application would allow the user to register and create a profile.  
+- The user can use this web app to track ingredients in their house.  
+- The user will be able to see the a list of recipes that he/she can make considering the ingredients in the house.  
+- The user will be able to filter through and categorize recipes.  
+- The web application will provide the user with a meal planner model.  
+- The web application will determine the list of grocery materials to be bought considering the meal plan.  
 
 **Node Modules Used for Reference:**  
-express: Run backend server and define API routes  
-express-validator: user input validation for the backend  
-bcryptjs: hashes user password for security  
-gravatar: to get user avatar  
-axios: call api endpoints in the frontend  
-react react-router-dom: to handle frontend components  
-redux react-redux redux-thunk: to handle application and component state  
-mongoose: connect and interact with the MongoDB database    
-passport: to implement google and facebook login and authentication  
+- express: Run backend server and define API routes  
+- express-validator: user input validation for the backend  
+- bcryptjs: hashes user password for security  
+- gravatar: to get user avatar  
+- axios: call api endpoints in the frontend  
+- react react-router-dom: to handle frontend components  
+- redux react-redux redux-thunk: to handle application and component state  
+- mongoose: connect and interact with the MongoDB database    
+- passport: to implement google and facebook login and authentication  
   
 **Instructions to Run project on your local machine:**  
   
