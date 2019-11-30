@@ -34,15 +34,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport");
 
-//serve react application during production
-console.log("App enviornment: " + config.get('NODE_ENV'));
-if(config.get('NODE_ENV') == "production"){
-    app.use(express.static(path.join(__dirname, 'client/build')));
-}
-else{
-    app.get('/', (req, res) => res.send('API Running'));
-}
-
 //Define Routes
 app.use('/api/users', users);
 app.use('/auth', auth);
@@ -50,10 +41,19 @@ app.use('/api/profile', profile);
 app.use('/api/recipes', recipes);
 app.use('/api/ingredients', ingredients);
 
-//Load react page if none of the path match
-app.get('*', (req,res) =>{
-    res.sendFile('index.html', {root: path.join(__dirname, 'client/build/')});
-});
+//serve react application during production
+console.log("App enviornment: " + config.get('NODE_ENV'));
+if(config.get('NODE_ENV') == "production"){
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    //Load react page if none of the path match
+    app.get('*', (req,res) =>{
+        console.log("Can not find file.");
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+}
+else{
+    app.get('/', (req, res) => res.send('API Running'));
+}
 
 const PORT = process.env.PORT || 5000;
 
