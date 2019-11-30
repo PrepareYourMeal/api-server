@@ -47,7 +47,7 @@ if(config.get('NODE_ENV') == "production"){
     app.use(express.static(path.join(__dirname, 'client/build')));
     //Load react page if none of the path match
     app.get('*', (req,res) =>{
-        console.log("Can not find file.");
+        console.log("Can not find file." + req.originalUrl);
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
 }
