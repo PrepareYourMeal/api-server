@@ -27,9 +27,9 @@ const NavMenuContent = (props) => {
                 </Link>
             </li>
             <li className="has-submenu">
-                <Link to="/seasonal" className="side-nav-link-ref">
+                <Link to="/ingredients" className="side-nav-link-ref">
                     <i className="mdi mdi-leaf"></i>
-                    Seasonal
+                    Ingredients
                 </Link>
             </li>
             <li className="has-submenu">

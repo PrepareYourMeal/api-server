@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState } from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import axios from 'axios';
@@ -8,17 +8,14 @@ import {
     Card,
     CardBody,
     CardImg,
-    CardText,
-    CardTitle,
     CardDeck,
-    Collapse, 
-    CardHeader,
-    CardFooter,
-    CardSubtitle,
-    Button
+    Button,
+    TabContent, 
+    TabPane,
+    Nav, NavItem, NavLink, CardTitle, CardText
 } from 'reactstrap';
+import food from '../../assets/images/food.png';
 
-import {getLoggedInUser} from '../../helpers/authUtils';
 import Loader from '../../components/Loader';
 
 
@@ -64,220 +61,223 @@ class Planner extends Component {
                     saturday: data.saturday,
                     sunday: data.sunday
                     })
+                    console.log(this.state.planner)
                 console.log(this.state)
                 // this.props.history.push('/dashboard');
             })
-            // const user = await axios.get(`/api/users/?token=${token}`, { withCredentials: true });
-            // console.log("4")
-            // console.log(user);
-            // this.setState({ user: user.data });
-            // console.log(this.state);
-            // this.setState({ user: user, isAuthenticated: true, name: name });
-            // this.props.authenticateUser(user.data);
-            // console.log("5")
-
-            
 
         }
     }
 
-    render() {
-
+    renderObj = () => { 
+        Object.keys(this.state.user).map((obj, i) => {
         return (
-            <React.Fragment>
-                <div className="">
-                    { /* preloader */}
-                    {this.props.loading && <Loader />}
+            <div>
+                {this.state.user[obj].name}
+            </div>
+      )})}
 
-                    <Row>
-                        <Col lg={12}>
-                            <div className="page-title-box">
+    render() {
+      
+        return (
+            <div className="">
+            { /* preloader */}
+            {this.props.loading && <Loader />}
 
-                                <h4 className="page-title">Planner</h4>
+            <Row>
+                <Col lg={12}>
+                    <div className="page-title-box">
+
+                        <h3 className="page-title">Planner</h3>
+                    </div>
+                </Col>
+            </Row>
+          
+            <h4>Monday</h4>
+            <Row className="bg-picture card-box">
+                
+            {this.state.monday.map((recipe, index) => (
+
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
+
+                                <p className="text-center">{recipe.title}</p>      
+
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
+
+                                </div>
                             </div>
-                        </Col>
-                    </Row>
+                            ))
+                            }
+            </Row>
 
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Monday
-                                    {this.state.monday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
+            <h4>Tuesday</h4>
+            <Row className="bg-picture card-box">
+            {this.state.tuesday.map((recipe, index) => (
 
-                    
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Tuesday
-                                    {this.state.tuesday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
 
-                    
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Wednesday
-                                    {this.state.wednesday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
+                                <p className="text-center">{recipe.title}</p>      
 
-                    
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Thursday
-                                    {this.state.thursday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
 
-                    
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Friday
-                                    {this.state.friday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Saturday
-                                    {this.state.saturday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
+                                </div>
+                            </div>
+                            ))
+                            }
+            </Row>
 
-                    <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   Sunday
-                                    {this.state.sunday.map((recipe, index) => (
-  
-                                    <Col lg={3} key={index}>
-                                    <CardDeck>
-                                    <Card className="gal-detail thumb card" height="60%">
-                                        <CardImg alt="Card image cap" src={recipe.imageUrl} top width="100%"/>
-                                        <CardBody>
-                                            <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                            <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                        </CardBody>
-                                    </Card>
-                                  </CardDeck>
-                          </Col>
-                          ))
-                          }
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-            </React.Fragment>
-        )
+            <h4>Wednesday</h4>
+            <Row className="bg-picture card-box">
+            {this.state.wednesday.map((recipe, index) => (
+
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
+
+                                <p className="text-center">{recipe.title}</p>      
+
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
+
+                                </div>
+                            </div>
+                            ))
+                            }
+            </Row>
+
+            <h4>Thursday</h4>
+            <Row className="bg-picture card-box">
+            {this.state.thursday.map((recipe, index) => (
+
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
+
+                                <p className="text-center">{recipe.title}</p>      
+
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
+
+                                </div>
+                            </div>
+                            ))
+                            }
+            </Row>
+
+            <h4>Friday</h4>
+            <Row className="bg-picture card-box">
+            {this.state.friday.map((recipe, index) => (
+
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
+
+                                <p className="text-center">{recipe.title}</p>      
+
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
+
+                                </div>
+                            </div>
+                            ))
+                            }
+            </Row>
+            
+            <h4>Saturday</h4>
+            <Row className="bg-picture card-box">
+            {this.state.saturday.map((recipe, index) => (
+
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
+
+                                <p className="text-center">{recipe.title}</p>      
+
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
+
+                                </div>
+                            </div>
+                            ))
+                            }
+            </Row>
+            
+            <h4>Sunday</h4>
+            <Row className="bg-picture card-box">
+            {this.state.sunday.map((recipe, index) => (
+
+            <div class="col-2">
+                                <div class="text-center card-box">
+                                <div class="text-cemter">
+                                    <Link to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}>
+                                        <img src={food} alt="" width="100p" class="text-center"/>
+                                    </Link>
+                                </div>
+                
+                                <div class="recipe-box-content">
+
+                                <p className="text-center">{recipe.title}</p>      
+
+                                <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
+                                  
+                                </div>
+
+                                </div>
+                            </div>
+                            ))
+                            }
+            </Row>
+        </div>
+        );
+
     }
 }
 

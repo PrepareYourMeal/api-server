@@ -2,23 +2,18 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 import { Route } from 'react-router-dom';
 
-import { isUserAuthenticated } from './helpers/authUtils';
-
 // load views
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Recipes = React.lazy(() => import('./pages/recipes/Recipes'));
 const Details = React.lazy(() => import('./pages/recipes/RecipeDetails'));
 const Favorites = React.lazy(() => import('./pages/favorites/Favorites'));
-const Seasonal = React.lazy(() => import('./pages/seasonal/Seasonal'));
+const Ingredients = React.lazy(() => import('./pages/seasonal/Seasonal'));
 const Profile = React.lazy(() => import('./pages/profile/Profile'));
 const Planner = React.lazy(() => import('./pages/profile/Planner'));
 const Home = React.lazy(() => import('./pages/Home'));
-
-
 const Help = React.lazy(() => import('./pages/information/Help'));
 const Contact = React.lazy(() => import('./pages/information/Contact'));
 const About = React.lazy(() => import('./pages/information/About'));
-
 // auth
 const Login = React.lazy(() => import('./pages/auth/Login'));
 const Logout = React.lazy(() => import('./pages/auth/Logout'));
@@ -59,7 +54,7 @@ const routes = [
   // other pages
   { path: '/dashboard', name: 'Dashboard', component: Dashboard, route: Route, title: 'Dashboard' },
   { path: '/recipes', name: 'Recipes', component: Recipes, route: Route, exact:true, title: 'Recipes' },
-  { path: '/recipe/?spoon_id=', name: 'RecipeDetails', component: Details, route: Route, title: 'RecipeDetails' },
+  { path: '/recipe/?spoon_id=:id', name: 'RecipeDetails', component: Details, route: Route, title: 'RecipeDetails' },
 
   // company information
   { path: '/contact', name: 'Contact Us', component: Contact, route: Route, title: 'Contact Us' },
@@ -67,13 +62,13 @@ const routes = [
   { path: '/about', name: 'About Us', component: About, route: Route, title: 'About Us' },
 
   { path: '/favorites', name: 'Favorites', component: Favorites, route: Route, title: 'Favorites' },
-  { path: '/seasonal', name: 'Seasonal', component: Seasonal, route: Route, title: 'Seasonal' },
+  { path: '/ingredients', name: 'Seasonal', component: Ingredients, route: Route, title: 'Seasonal' },
   { path: '/profile', name: 'Profile', component: Profile, route: Route, title: 'Profile' },
   { path: '/planner', name: 'Planner', component: Planner, route: Route, title: 'Planner' },
   {
     path: "/",
     exact: true,
-    component: () => <Redirect to="/home" />,
+    component: () => <Redirect to="/dashboard" />,
     route: Route
   },
   

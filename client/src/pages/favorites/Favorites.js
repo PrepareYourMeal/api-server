@@ -16,6 +16,7 @@ import {
     CardSubtitle,
     Button
 } from 'reactstrap';
+import food from '../../assets/images/food.png';
 
 
 class Favorites extends Component {
@@ -44,21 +45,10 @@ class Favorites extends Component {
             const url = `/api/users/${token}/favourites`;
             axios.get(url, { withCredentials: true }).then(response => response.data)
             .then((data) => {
-                console.log(data)
                 this.setState({ favourites: data })
                 console.log(this.state.favourites)
                 // this.props.history.push('/dashboard');
             })
-            // const user = await axios.get(`/api/users/?token=${token}`, { withCredentials: true });
-            // console.log("4")
-            // console.log(user);
-            // this.setState({ user: user.data });
-            // console.log(this.state);
-            // this.setState({ user: user, isAuthenticated: true, name: name });
-            // this.props.authenticateUser(user.data);
-            // console.log("5")
-
-            
 
         }
     }
@@ -105,31 +95,26 @@ class Favorites extends Component {
                     </Row>
 
                     <Row>
-                        <Col lg={12}>
-                            <Card>
-                                <CardBody>
-                                   My Favorites
+
                         {this.state.favourites.map((recipe, index) => (
-  
-                          <Col lg={3} key={index}>
-                              <CardDeck>
-  
-                                  <Card className="gal-detail thumb card" height="60%">
-                                      <CardBody>
-                                          <p className="text-center"><small>{recipe.title}</small></p>                                        
-                                          {/* <CardSubtitle>{recipe.servings}</CardSubtitle> */}
-                                          {/* <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText> */}
-                                          <Link to={{pathname:`/recipe/${recipe.spoon_id}`, state:{recipe:recipe}}}><Button color="secondary" className="btn-block" type="button">View Details</Button></Link>
-                                         <Button onClick={() => this.removeFavourite(recipe.spoon_id)}>Remove from Fridge</Button>
-                                      </CardBody>
-                                  </Card>
-                                  </CardDeck>
-                          </Col>
+                              <div class="col-sm-2 col-md-2">
+                              <div class="card-box widget-user">
+                                  <div>
+                                      <div class="avatar-lg float-left mr-2">
+                                          <img src={food} class="img-fluid rounded-circle" alt="user"/>
+                                      </div>
+                                      <div class="wid-u-info">
+                                          <p class="text-muted mb-1 font-13 text-truncate">{recipe.title}</p>
+                                          <div class="button-list">
+                                          <Link  to={{pathname:`/recipe/?spoon_id=${recipe.spoon_id}`, state:{recipe:recipe}}}><Button><i class="far fa-eye"></i></Button></Link>
+                                          <Button onClick={() => this.removeFavourite(recipe.spoon_id)}><i class="fas fa-trash-alt"></i></Button>
+                                        </div>
+                                          </div>
+                                  </div>
+                              </div>
+                              </div>
                           ))
                           }
-                                </CardBody>
-                            </Card>
-                        </Col>
                     </Row>
                 </div>
             </React.Fragment>
