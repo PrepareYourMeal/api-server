@@ -82,7 +82,9 @@ class Login extends Component {
                                             {this.props.error && <Alert color="danger" isOpen={this.props.error ? true : false}>
                                                 <div>{this.props.error}</div>
                                             </Alert>}
-                                            <a href="/auth/google" class="button">
+                                            <div class="text-center">
+                                            <Button>
+                                                <a href="/auth/google" class="button">
                                                     <div>
                                                         <span class="svgIcon t-popup-svg">
                                                         <svg
@@ -110,10 +112,13 @@ class Login extends Component {
                                                             />
                                                             </g>
                                                         </svg>
-                                                </span>
-                                                <span class="button-label">Sign in with Google</span>
+                                                        </span>
+                                                        <span class="button-label">Sign in with Google</span>
+                                                    </div>
+                                                </a>
+                                            </Button>
+                                            
                                             </div>
-                                            </a>
                                         </CardBody>
                                     </Card>
                                 </Col>

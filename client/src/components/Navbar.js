@@ -11,31 +11,25 @@ const NavMenuContent = (props) => {
             <li className="has-submenu">
                 <Link to="/dashboard" className="side-nav-link-ref">
                     <i className="mdi mdi-fridge"></i>
-                    Refrigerator
+                    Dashboard
                 </Link>
             </li>
             <li className="has-submenu">
                 <Link to="/recipes" className="side-nav-link-ref">
                     <i className="mdi mdi-book-open-page-variant"></i>
-                    My Recipes
-                </Link>
-            </li>
-            <li className="has-submenu">
-                <Link to="/favorites" className="side-nav-link-ref">
-                    <i className="mdi mdi-star-outline"></i>
-                    Favorites
-                </Link>
-            </li>
-            <li className="has-submenu">
-                <Link to="/ingredients" className="side-nav-link-ref">
-                    <i className="mdi mdi-leaf"></i>
-                    Ingredients
+                    Recipes
                 </Link>
             </li>
             <li className="has-submenu">
                 <Link to="/planner" className="side-nav-link-ref">
                     <i className="mdi mdi-file-document-box-multiple"></i>
                     Planner
+                </Link>
+            </li>
+            <li className="has-submenu">
+                <Link to="/ingredients" className="side-nav-link-ref">
+                    <i className="mdi mdi-leaf"></i>
+                    Ingredients
                 </Link>
             </li>
         </ul>

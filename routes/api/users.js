@@ -511,4 +511,87 @@ router.delete('/:token/planner/sunday/:rec_id', auth, async (req, res) => {
     }
 });
 
+router.get('/:token/planner/grocery', auth, async (req, res) => {
+    const token = req.params.token;
+    try {
+        const user = await User.findOne({ authToken: token });
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        let ingredients = []
+        for (let i = 0; i < user.planner.monday.length; i++) {
+            let arr = user.planner.monday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        for (let i = 0; i < user.planner.tuesday.length; i++) {
+            let arr = user.planner.tuesday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        for (let i = 0; i < user.planner.wednesday.length; i++) {
+            let arr = user.planner.wednesday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        for (let i = 0; i < user.planner.thursday.length; i++) {
+            let arr = user.planner.thursday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        for (let i = 0; i < user.planner.friday.length; i++) {
+            let arr = user.planner.friday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        for (let i = 0; i < user.planner.saturday.length; i++) {
+            let arr = user.planner.saturday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        for (let i = 0; i < user.planner.sunday.length; i++) {
+            let arr = user.planner.sunday[i].ingredients
+            for (let j = 0; j < arr.length; j++) {
+                ingredients.push(arr[j])
+            }
+        }
+
+        let flags = [];
+        let output = [];
+        for (let i = 0; i < ingredients.length; i++) {
+            if (flags[ingredients[i].spoon_id]) continue;
+            flags[ingredients[i].spoon_id] = true;
+            output.push(ingredients[i]);
+        }
+
+        for (let i = 0; i < user.inventory.length; i++) {
+            for (let j = 0; j < output.length; j++) {
+                if (output[j].spoon_id === user.inventory[i].spoon_id) {
+                    const removeIndex = output.map(item => item.spoon_id).indexOf(output[j].spoon_id);
+                    output.splice(removeIndex, 1);
+                }
+            }
+        }
+
+        // user.grocery = output;
+        // user.save();
+        res.json(output);
+
+    } catch (e) {
+        console.log(e)
+    }
+});
+
 module.exports = router;

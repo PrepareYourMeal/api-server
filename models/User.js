@@ -53,7 +53,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         tuesday: [
@@ -84,7 +120,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         wednesday: [
@@ -92,7 +164,6 @@ const UserSchema = new mongoose.Schema({
                 recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'recipes'
-
                 },
                 title: {
                     type: String
@@ -108,7 +179,6 @@ const UserSchema = new mongoose.Schema({
                         },
                         name: {
                             type: String
-
                         },
                         spoon_id: {
                             type: Number
@@ -117,7 +187,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         thursday: [
@@ -148,7 +254,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         friday: [
@@ -179,7 +321,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         saturday: [
@@ -210,7 +388,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         sunday: [
@@ -241,7 +455,43 @@ const UserSchema = new mongoose.Schema({
                             type: Number
                         }
                     }
-                ]
+                ],
+                vegetarian: {
+                    type: Boolean
+                },
+                vegan: {
+                    type: Boolean
+                },
+                glutenFree: {
+                    type: Boolean
+                },
+                dairyFree: {
+                    type: Boolean
+                },
+                ketogenic: {
+                    type: Boolean
+                },
+                preparationMinutes: {
+                    type: Number
+                },
+                readyInMinutes: {
+                    type: Number
+                },
+                servings: {
+                    type: Number
+                },
+                sourceUrl: {
+                    type: String
+                },
+                imageUrl: {
+                    type: String
+                },
+                instructions: {
+                    type: [String]
+                },
+                tags: {
+                    type: [String]
+                }
             }
         ],
         date: {
@@ -305,7 +555,43 @@ const UserSchema = new mongoose.Schema({
                         type: Number
                     }
                 }
-            ]
+            ],
+            vegetarian: {
+                type: Boolean
+            },
+            vegan: {
+                type: Boolean
+            },
+            glutenFree: {
+                type: Boolean
+            },
+            dairyFree: {
+                type: Boolean
+            },
+            ketogenic: {
+                type: Boolean
+            },
+            preparationMinutes: {
+                type: Number
+            },
+            readyInMinutes: {
+                type: Number
+            },
+            servings: {
+                type: Number
+            },
+            sourceUrl: {
+                type: String
+            },
+            imageUrl: {
+                type: String
+            },
+            instructions: {
+                type: [String]
+            },
+            tags: {
+                type: [String]
+            }
         }
     ],
     tags: {
