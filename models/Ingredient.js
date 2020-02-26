@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
+const n = require('./modelNames');
 
 const IngredientSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     spoon_id: {
         type: Number,
-        required: true
-    }
+        required: true,
+    },
 });
 
-module.exports = Ingredient = mongoose.model('ingredient', IngredientSchema);
+module.exports = mongoose.model(n.Ingredient, IngredientSchema);

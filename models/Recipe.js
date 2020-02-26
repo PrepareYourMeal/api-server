@@ -1,33 +1,34 @@
 const mongoose = require('mongoose');
+const n = require('./modelNames');
 
 const RecipeSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
     },
-    spoon_id: {
+    spoonId: {
         type: Number,
-        required: true
+        required: true,
     },
     vegetarian: {
         type: Boolean,
-        required: true
+        required: true,
     },
     vegan: {
         type: Boolean,
-        required: true
+        required: true,
     },
     glutenFree: {
         type: Boolean,
-        required: true
+        required: true,
     },
     dairyFree: {
         type: Boolean,
-        required: true
+        required: true,
     },
     ketogenic: {
         type: Boolean,
-        required: true
+        required: true,
     },
     preparationMinutes: {
         type: Number,
@@ -40,44 +41,44 @@ const RecipeSchema = new mongoose.Schema({
     },
     sourceUrl: {
         type: String,
-        required: true
+        required: true,
     },
     imageUrl: {
         type: String,
-        required: true
+        required: true,
     },
     ingredients: [
         {
-            ingredient_id: {
+            ingredientId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'ingredients',
-                required: true
+                ref: n.Ingredient,
+                required: true,
             },
             name: {
                 type: String,
-                required: true
+                required: true,
             },
-            spoon_id: {
+            spoonId: {
                 type: Number,
-                required: true
+                required: true,
             },
             quantity: {
                 type: Number,
-                required: true
+                required: true,
             },
             unit: {
                 type: String,
-            }
-        }
+            },
+        },
     ],
     instructions: {
         type: [String],
-        required: true
+        required: true,
     },
     tags: {
         type: [String],
-        required: true
-    }
+        required: true,
+    },
 });
 
-module.exports = Recipe = mongoose.model('recipes', RecipeSchema)
+module.exports = mongoose.model(n.Recipe, RecipeSchema);
