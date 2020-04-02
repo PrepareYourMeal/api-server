@@ -2,18 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const auth = require('../../middleware/auth');
 
 // Import relevant models
-const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 // GET api/profile/me
 // GET current user profile
 // access Private
-router.get('/me', auth, async (req, res) => {
+router.get('/me', async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
+        const profile = await User.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
 
         if (!profile) {
             return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -73,15 +71,15 @@ router.post(
         profileFields.tags = tagsArray;
 
         try {
-            let profile = Profile.findOne({ user: req.user.id });
+            let profile = User.findOne({ user: req.user.id });
             if (profile) {
                 // update
-                profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true });
+                profile = await User.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true });
                 return res.json(profile);
             }
 
             // create profile
-            profile = new Profile(profileFields);
+            profile = new User(profileFields);
             await profile.save();
             return res.json(profile);
         } catch (err) {

@@ -2,7 +2,6 @@ const express = require('express');
 
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const auth = require('../../middleware/auth');
 
 // Import Ingredients model
 const Ingredient = require('../../models/Ingredient');
@@ -10,7 +9,7 @@ const Ingredient = require('../../models/Ingredient');
 // GET api/ingredients
 // get all ingredients
 // access - private
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const ingredients = await Ingredient.find().sort({ name: -1 });
         res.json(ingredients);
@@ -23,7 +22,7 @@ router.get('/', auth, async (req, res) => {
 // GET api/ingredients/:id
 // get ingredient by id
 // access - Private
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const ingredient = await Ingredient.findById(req.params.id);
         if (!ingredient) {
@@ -45,15 +44,12 @@ router.get('/:id', auth, async (req, res) => {
 router.post(
     '/',
     [
-        auth,
-        [
-            check('name', 'Ingredient Name is required')
-                .not()
-                .isEmpty(),
-            check('spoon_id', 'Spoonacular ID is required')
-                .not()
-                .isEmpty(),
-        ],
+        check('name', 'Ingredient Name is required')
+            .not()
+            .isEmpty(),
+        check('spoon_id', 'Spoonacular ID is required')
+            .not()
+            .isEmpty(),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -77,7 +73,7 @@ router.post(
 // DELETE api/ingredients/:id
 // delete ingredient by id
 // access - private
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const ingredient = await Ingredient.findById(req.params.id);
         if (!ingredient) {
