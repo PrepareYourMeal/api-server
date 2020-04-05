@@ -1,75 +1,494 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const n = require('./modelNames');
 
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
-    },
-    email: {
-        type: String,
-        // unique: true,
-    },
-    googleId: {
-        type: String,
+        unique: true,
     },
     password: {
         type: String,
     },
+    email: {
+        type: String,
+    },
+    googleId: {
+        type: String,
+    },
+    photo: {
+        type: String,
+    },
+    latestLogedInDate: { type: Date },
+    registeredDate: {
+        type: Date,
+    },
     planner: {
         monday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
         tuesday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
         wednesday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
         thursday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
         friday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
         saturday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
         sunday: [
             {
-                recipeId: {
+                recipe_id: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: n.Recipe,
+                    ref: 'recipes',
+                },
+                title: {
+                    type: String,
+                },
+                spoon_id: {
+                    type: Number,
+                },
+                ingredients: [
+                    {
+                        ingredient_id: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: 'ingredients',
+                        },
+                        name: {
+                            type: String,
+                        },
+                        spoon_id: {
+                            type: Number,
+                        },
+                        quantity: {
+                            type: Number,
+                        },
+                    },
+                ],
+                vegetarian: {
+                    type: Boolean,
+                },
+                vegan: {
+                    type: Boolean,
+                },
+                glutenFree: {
+                    type: Boolean,
+                },
+                dairyFree: {
+                    type: Boolean,
+                },
+                ketogenic: {
+                    type: Boolean,
+                },
+                preparationMinutes: {
+                    type: Number,
+                },
+                readyInMinutes: {
+                    type: Number,
+                },
+                servings: {
+                    type: Number,
+                },
+                sourceUrl: {
+                    type: String,
+                },
+                imageUrl: {
+                    type: String,
+                },
+                instructions: {
+                    type: [String],
+                },
+                tags: {
+                    type: [String],
                 },
             },
         ],
@@ -80,23 +499,96 @@ const UserSchema = new mongoose.Schema({
     },
     inventory: [
         {
-            ingredientId: {
+            ingredient_id: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: n.Ingredient,
+                ref: 'ingredients',
             },
             name: {
                 type: String,
             },
-            spoonId: {
+            spoon_id: {
+                type: Number,
+            },
+        },
+    ],
+    grocery: [
+        {
+            ingredient_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ingredients',
+            },
+            name: {
+                type: String,
+            },
+            spoon_id: {
                 type: Number,
             },
         },
     ],
     favourites: [
         {
-            recipeId: {
+            recipe_id: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: n.Recipe,
+                ref: 'recipes',
+            },
+            title: {
+                type: String,
+            },
+            spoon_id: {
+                type: Number,
+            },
+            ingredients: [
+                {
+                    ingredient_id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'ingredients',
+                    },
+                    name: {
+                        type: String,
+                    },
+                    spoon_id: {
+                        type: Number,
+                    },
+                    quantity: {
+                        type: Number,
+                    },
+                },
+            ],
+            vegetarian: {
+                type: Boolean,
+            },
+            vegan: {
+                type: Boolean,
+            },
+            glutenFree: {
+                type: Boolean,
+            },
+            dairyFree: {
+                type: Boolean,
+            },
+            ketogenic: {
+                type: Boolean,
+            },
+            preparationMinutes: {
+                type: Number,
+            },
+            readyInMinutes: {
+                type: Number,
+            },
+            servings: {
+                type: Number,
+            },
+            sourceUrl: {
+                type: String,
+            },
+            imageUrl: {
+                type: String,
+            },
+            instructions: {
+                type: [String],
+            },
+            tags: {
+                type: [String],
             },
         },
     ],
@@ -128,6 +620,8 @@ UserSchema.statics.findAndValidateByUsernameAndPassword = async function(usernam
     if (!passwordIsValid) {
         throw new Error('The username or the password is not correct');
     } else {
+        user.latestLogedInDate = Date.now();
+        await user.save();
         return user;
     }
 };

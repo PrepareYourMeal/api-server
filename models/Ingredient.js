@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const n = require('./modelNames');
 
 const IngredientSchema = new mongoose.Schema({
     name: {
@@ -12,4 +11,4 @@ const IngredientSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model(n.Ingredient, IngredientSchema);
+module.exports = mongoose.model('ingredient', IngredientSchema);
