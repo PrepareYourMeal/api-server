@@ -3,3 +3,4 @@ config/*
 !config/default.json.example
 
 node_modules/
+.env
