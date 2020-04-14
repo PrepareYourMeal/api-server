@@ -12,7 +12,7 @@ jobs:
         SOURCE_REPO: "rasodu/Recipes"
         SOURCE_BRANCH: "production"
         DESTINATION_REPO: "dokku@prepareyourmeal.rasodu.com:prepareyourmeal-api"
-        DESTINATION_BRANCH: "production"
+        DESTINATION_BRANCH: "master"
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       with:
         args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
