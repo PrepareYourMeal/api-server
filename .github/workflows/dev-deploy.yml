@@ -9,7 +9,7 @@ jobs:
     - name: repo-sync
       uses: rasodu/git-sync-custom@v2.0.0
       env:
-        SOURCE_REPO: "PrepareYourMeal/client"
+        SOURCE_REPO: "PrepareYourMeal/api-server"
         SOURCE_BRANCH: "master"
         DESTINATION_REPO: "dokku@prepareyourmeal.rasodu.com:prepareyourmeal-dev-api"
         DESTINATION_BRANCH: "master"
