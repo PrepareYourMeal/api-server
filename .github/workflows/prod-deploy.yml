@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - production
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: repo-sync
+      uses: rasodu/git-sync-custom@v2.0.0
+      env:
+        SOURCE_REPO: "rasodu/Recipes"
+        SOURCE_BRANCH: "production"
+        DESTINATION_REPO: "dokku@prepareyourmeal.rasodu.com:prepareyourmeal-api"
+        DESTINATION_BRANCH: "production"
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH

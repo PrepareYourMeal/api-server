@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: repo-sync
+      uses: rasodu/git-sync-custom@v2.0.0
+      env:
+        SOURCE_REPO: "PrepareYourMeal/client"
+        SOURCE_BRANCH: "master"
+        DESTINATION_REPO: "dokku@prepareyourmeal.rasodu.com:prepareyourmeal-dev-api"
+        DESTINATION_BRANCH: "master"
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
