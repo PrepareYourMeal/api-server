@@ -1,6 +1,6 @@
 require('skyapm-nodejs').start({
     serviceName: 'api-server',
-    directServers: 'skywalking:11800'
+    directServers: '10.153.100.81:11800'
 });
 
 require('dotenv').config();
