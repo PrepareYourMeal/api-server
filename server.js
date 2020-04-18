@@ -1,3 +1,8 @@
+require('skyapm-nodejs').start({
+    serviceName: 'api-server',
+    directServers: 'skywalking:11800'
+});
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');

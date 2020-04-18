@@ -37,7 +37,8 @@
     "passport-google-token": "^0.1.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "skyapm-nodejs": "^1.1.2"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
