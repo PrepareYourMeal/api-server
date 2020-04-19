@@ -1,9 +1,9 @@
+require('dotenv').config();
 require('skyapm-nodejs').start({
-    serviceName: 'api-server',
+    serviceName: process.env.SERVICE_NAME,
     directServers: '10.153.100.81:11800'
 });
 
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
