@@ -38,8 +38,9 @@ router.post('/login', async (req, res) => {
         exp: Date.now() / 1000 + 60, // 2 hour since the token signed
     };
     const jwtAuthToken = jwt.sign(payload, process.env.JWT_SECRET);
+    const userId = user.id;
 
-    return res.json({ jwtAuthToken });
+    return res.json({ jwtAuthToken, userId });
 });
 
 router.use('/testlogin', passport.authenticate(['jwt', 'google-token'], { session: false }), (req, res) => {

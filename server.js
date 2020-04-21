@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('skyapm-nodejs').start({
     serviceName: process.env.SERVICE_NAME,
-    directServers: '10.153.100.81:11800'
+    directServers: '10.153.100.81:11800',
 });
 
 const express = require('express');
