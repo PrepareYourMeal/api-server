@@ -9,7 +9,7 @@ router.get('/loginhistory', async (req, res) => {
     }
 
     const allUsers = await User.find({}).exec();
-    const userLoginDtData = allUsers.map(({ username, latestLoginDate, registeredDate }) => ({ username, latestLoginDate, registeredDate }));
+    const userLoginDtData = allUsers.map(({ username, latestLogedInDate, registeredDate }) => ({ username, latestLogedInDate, registeredDate }));
 
     return res.json(userLoginDtData);
 });
