@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
 
     const payload = {
         sub: user.id,
-        exp: Date.now() / 1000 + 60, // 2 hour since the token signed
+        exp: Date.now() + 60 * 2, // 2 hour since the token signed
     };
     const jwtAuthToken = jwt.sign(payload, process.env.JWT_SECRET);
     const userId = user.id;
