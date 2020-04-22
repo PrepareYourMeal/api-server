@@ -33,6 +33,9 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ msg: 'Username or password is not correct!' });
     }
 
+    user.latestLoginDate = Date.now();
+    await user.save();
+
     const payload = {
         sub: user.id,
         exp: Date.now() / 1000 + 60, // 2 hour since the token signed
