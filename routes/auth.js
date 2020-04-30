@@ -46,6 +46,10 @@ router.post('/login', async (req, res) => {
     return res.json({ jwtAuthToken, userId });
 });
 
+router.post('/googlelogin', passport.authenticate('google-token', { session: false }), async (req, res) => {
+    return res.json({ userId: req.user.id });
+});
+
 router.use('/testlogin', passport.authenticate(['jwt', 'google-token'], { session: false }), (req, res) => {
     return res.status(200).json({ user: req.user });
 });
