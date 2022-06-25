@@ -31,7 +31,7 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.5",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "passport": "^0.4.0",
     "passport-google-plus-token": "^2.1.0",
     "passport-google-token": "^0.1.2",
